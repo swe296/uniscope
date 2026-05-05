@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Course Finder</title>
+<link rel="stylesheet" href="css/ui.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <img src="assets/logo.png" alt="UniScope Logo" class="logo">
+    <span class="brand-name">UniScope</span>
+  </div>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="coursefinder.html">Course Finder</a>
+    <a href="studyabroad.html">Study Abroad</a>
+     <a href="financial.html">Financial Planner</a>
+    <a href="saved.html">Saved</a>
+    <a href="profile.html">Profile</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </nav>
+</header>
+
+<script src="js/auth.js"></script>
+
+
+<section class="finder-hero">
+  <h1>Find Your Perfect College</h1>
+  <p>Answer a few questions. We’ll do the thinking.</p>
+</section>
+
+<section class="wizard">
+
+  <div class="step">
+    <h2>What do you want to study?</h2>
+    
+    <div class="option-grid">
+      <div class="option active" onclick="selectCourse('Engineering',this)">Engineering</div>
+      <div class="option" onclick="selectCourse('Management',this)">Management</div>
+      <div class="option" onclick="selectCourse('Science',this)">Science</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <h2>Preferred Location</h2>
+    <div class="option-grid">
+      <div class="option active" onclick="selectLocation('India',this)">India</div>
+      <div class="option" onclick="selectLocation('Abroad',this)">Abroad</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <h2>Your Entrance Cutoff</h2>
+    <input type="range" min="100" max="200" value="160" id="cutoffRange">
+    <div class="range-value">Cutoff: <span id="cutoffVal">160</span></div>
+  </div>
+
+  <div class="step">
+    <h2>Annual Budget</h2>
+    <input type="range" min="100000" max="6000000" step="50000" value="300000" id="budgetRange">
+    <div class="range-value">Budget: ₹<span id="budgetVal">300000</span></div>
+  </div>
+
+  <button class="primary-btn" onclick="recommend()">Show My Matches</button>
+</section>
+
+<section class="results">
+  <h2>Recommended Colleges</h2>
+  <div id="cards"></div>
+</section>
+<section class="results" id="cutoffSection" style="display:none;">
+  <h2>Cutoff Trend Analysis</h2>
+  <canvas id="cutoffChart"></canvas>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="js/recommender.js"></script>
+</body>
+</html>

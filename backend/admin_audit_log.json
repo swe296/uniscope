@@ -1,0 +1,227 @@
+[
+  {
+    "ID": 1776062712851,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13981,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-13T06:45:12.851Z"
+  },
+  {
+    "ID": 1776062700091,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13981,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-13T06:45:00.091Z"
+  },
+  {
+    "ID": 1776054478245,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13981,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-13T04:27:58.245Z"
+  },
+  {
+    "ID": 1776054464625,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13981,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-13T04:27:44.625Z"
+  },
+  {
+    "ID": 1775626249379,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13980,
+    "DETAILS": "Created Indian Institute o Technology",
+    "CREATED_AT": "2026-04-08T05:30:49.379Z"
+  },
+  {
+    "ID": 1775626190029,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 1704,
+    "DETAILS": "Deleted Indian Institute of Technology Madras",
+    "CREATED_AT": "2026-04-08T05:29:50.032Z"
+  },
+  {
+    "ID": 1775181698556,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13984,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-03T02:01:38.556Z"
+  },
+  {
+    "ID": 1775181695877,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13983,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-03T02:01:35.877Z"
+  },
+  {
+    "ID": 1775181693203,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13985,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-03T02:01:33.203Z"
+  },
+  {
+    "ID": 1775181690341,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13981,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-03T02:01:30.341Z"
+  },
+  {
+    "ID": 1775181687334,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13980,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-03T02:01:27.334Z"
+  },
+  {
+    "ID": 1775181615707,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13982,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-03T02:00:15.707Z"
+  },
+  {
+    "ID": 1775181604249,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13985,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-03T02:00:04.249Z"
+  },
+  {
+    "ID": 1775181604202,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13984,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-03T02:00:04.202Z"
+  },
+  {
+    "ID": 1775180591729,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13984,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-03T01:43:11.729Z"
+  },
+  {
+    "ID": 1775180579500,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13985,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-03T01:42:59.500Z"
+  },
+  {
+    "ID": 1775180569254,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13985,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-03T01:42:49.254Z"
+  },
+  {
+    "ID": 1775180569184,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13984,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-03T01:42:49.184Z"
+  },
+  {
+    "ID": 1775180549650,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13983,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-03T01:42:29.650Z"
+  },
+  {
+    "ID": 1775180549619,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13982,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-03T01:42:29.619Z"
+  },
+  {
+    "ID": 1775180105865,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "DELETE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13982,
+    "DETAILS": "Deleted bitsat",
+    "CREATED_AT": "2026-04-03T01:35:05.865Z"
+  },
+  {
+    "ID": 1775180092084,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13982,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-03T01:34:52.084Z"
+  },
+  {
+    "ID": 1775180092035,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13981,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-03T01:34:52.035Z"
+  },
+  {
+    "ID": 1775180083685,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "CREATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 13980,
+    "DETAILS": "Created bitsat",
+    "CREATED_AT": "2026-04-03T01:34:43.685Z"
+  },
+  {
+    "ID": 1775134880657,
+    "ADMIN_EMAIL": "admin@uniscope.com",
+    "ACTION": "UPDATE",
+    "ENTITY": "COLLEGE",
+    "ENTITY_ID": 1704,
+    "DETAILS": "Updated rank/link",
+    "CREATED_AT": "2026-04-02T13:01:20.657Z"
+  }
+]

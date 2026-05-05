@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  background: linear-gradient(135deg, #020617, #0f172a 45%, #1e293b);
+  color: white;
+  min-height: 100vh;
+}
+
+.hero {
+  text-align: center;
+  padding: 60px 20px 20px;
+}
+
+.title {
+  text-align: center;
+  margin: 20px 0 10px;
+  font-size: 52px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.subtitle {
+  text-align: center;
+  color: #cbd5f5;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  padding: 30px 40px 50px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.college-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 32px;
+  border-radius: 24px;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.college-box h2 {
+  color: #38bdf8;
+  margin-bottom: 22px;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.compare-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.compare-row:last-child {
+  border-bottom: none;
+}
+
+.compare-label {
+  color: #cbd5f5;
+  font-weight: 500;
+}
+
+.compare-value {
+  color: #ffffff;
+  font-weight: 600;
+  text-align: right;
+}
+
+.better {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+.neutral {
+  color: #f8fafc;
+}
+
+.compare-note {
+  max-width: 1200px;
+  margin: 0 auto 10px;
+  padding: 0 40px;
+  color: #93c5fd;
+  text-align: center;
+}
+
+.empty-box {
+  opacity: 0.8;
+  text-align: center;
+  color: #cbd5f5;
+}
+
+@media (max-width: 1000px) {
+  .compare-grid {
+    grid-template-columns: 1fr;
+    padding: 20px 20px 40px;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .compare-note {
+    padding: 0 20px;
+  }
+}

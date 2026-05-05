@@ -1,0 +1,63 @@
+body{
+background:linear-gradient(120deg,#0f172a,#1e293b);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:Poppins;
+}
+
+.auth-box{
+background:rgba(255,255,255,0.1);
+padding:40px;
+border-radius:16px;
+width:320px;
+backdrop-filter:blur(15px);
+color:white;
+}
+
+.auth-box input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:8px;
+border:none;
+}
+
+.auth-box button{
+width:100%;
+padding:12px;
+background:#38bdf8;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.role-switch{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tab-btn{
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #dbe4ff;
+  color: #1a2a4f;
+  font-weight: 600;
+}
+
+.tab-btn.active{
+  background: #364a80;
+  color: white;
+}
+
+#msg{
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
+}

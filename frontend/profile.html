@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile | UniScope</title>
+  <link rel="stylesheet" href="css/ui.css">
+  <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+<header class="navbar">
+  <div class="brand">
+    <img src="assets/logo.png" alt="UniScope Logo" class="logo">
+    <span class="brand-name">UniScope</span>
+  </div>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="coursefinder.html">Course Finder</a>
+    <a href="studyabroad.html">Study Abroad</a>
+    <a href="financial.html">Financial Planner</a>
+    <a href="saved.html">Saved</a>
+    <a href="profile.html">Profile</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Student Profile</h1>
+</section>
+
+<section class="profile-container">
+
+  <div class="progress-wrapper">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <p id="progressText">0% Completed</p>
+
+  <div id="formSteps">
+    <div class="step active">
+      <h2>Personal Details</h2>
+      <input type="text" id="name" placeholder="Full Name">
+      <input type="email" id="email" placeholder="Email">
+      <input type="text" id="city" placeholder="City">
+      <input type="text" id="phone" placeholder="Phone">
+    </div>
+
+    <div class="step">
+      <h2>Academic Details</h2>
+      <input type="number" id="twelfth" placeholder="12th Percentage">
+      <input type="text" id="exam" placeholder="Entrance Exam">
+      <input type="text" id="rank" placeholder="Rank">
+      <input type="text" id="degree" placeholder="Degree">
+      <input type="text" id="college" placeholder="College Name">
+    </div>
+
+    <div class="step">
+      <h2>Preferences</h2>
+      <input type="text" id="course" placeholder="Preferred Course">
+      <input type="text" id="locationPref" placeholder="Preferred Location">
+      <input type="number" id="budget" placeholder="Budget (₹)">
+      <input type="text" id="preferredCountry" placeholder="Preferred Country">
+    </div>
+
+   
+<div class="step">
+  <h2>Financial Details</h2>
+  <input type="number" id="income" placeholder="Family Income (₹)">
+  <input type="text" id="loan" placeholder="Need Loan? (Yes/No)">
+
+  <button class="save-btn" onclick="submitProfile()">Save Profile</button>
+</div>
+
+
+    <div class="wizard-buttons">
+      <button onclick="prevStep()">Previous</button>
+      <button onclick="nextStep()">Next</button>
+    </div>
+  </div>
+
+  <div id="reviewProfile" class="hidden">
+    <h2>Profile Summary</h2>
+    <div class="view-grid" id="profileSummary"></div>
+    <button class="edit-btn" onclick="editProfile()">Edit Profile</button>
+  </div>
+
+</section>
+
+<script src="js/auth.js"></script>
+<script src="js/profile.js"></script>
+</body>
+</html>
