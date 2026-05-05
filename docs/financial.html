@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Financial Planner | UniScope</title>
+<link rel="stylesheet" href="css/ui.css">
+<link rel="stylesheet" href="css/financial.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <img src="assets/logo.png" alt="UniScope Logo" class="logo">
+    <span class="brand-name">UniScope</span>
+  </div>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="coursefinder.html">Course Finder</a>
+    <a href="studyabroad.html">Study Abroad</a>
+    <a href="financial.html">Financial Planner</a>
+    <a href="saved.html">Saved</a>
+    <a href="profile.html">Profile</a>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Plan Your <span>Education Finances</span></h1>
+  <p>Estimate costs, loan burden & affordability before choosing a college</p>
+</section>
+
+<section class="finance-grid">
+
+  <div class="finance-card">
+    <h3>🎓 Study Cost Estimator</h3>
+
+    <label>Annual Tuition Fee (₹)</label>
+    <input type="number" id="tuition">
+
+    <label>Annual Living Cost (₹)</label>
+    <input type="number" id="living">
+
+    <label>Course Duration (Years)</label>
+    <input type="number" id="years">
+
+    <button onclick="calculateCost()">Estimate Total Cost</button>
+
+    <div class="result-box" id="costResult"></div>
+  </div>
+
+  <div class="finance-card highlight">
+    <h3>🏦 Education Loan Planner</h3>
+
+    <label>Loan Amount (₹)</label>
+    <input type="number" id="loanAmount">
+
+    <label>Interest Rate (% per year)</label>
+    <input type="number" id="interest">
+
+    <label>Tenure (Years)</label>
+    <input type="number" id="tenure">
+
+    <button onclick="calculateEMI()">Calculate EMI</button>
+
+    <div class="result-box" id="emiResult"></div>
+  </div>
+
+</section>
+<div class="suggestions" id="suggestions">
+  <h3>Recommended Options</h3>
+  <div id="collegeSuggestions"></div>
+  <div id="bankSuggestions"></div>
+</div>
+
+<section class="insight">
+  <h2>💡 Smart Insight</h2>
+  <p id="insightText">Enter your details to see financial insights.</p>
+</section>
+
+<script src="js/auth.js"></script>
+<script src="js/financial.js"></script>
+</body>
+</html>

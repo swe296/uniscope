@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Study Abroad | UniScope</title>
+
+  <link rel="stylesheet" href="css/ui.css">
+  <link rel="stylesheet" href="css/studyabroad.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="navbar">
+  <div class="brand">
+    <img src="assets/logo.png" alt="UniScope Logo" class="logo">
+    <span class="brand-name">UniScope</span>
+  </div>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="coursefinder.html">Course Finder</a>
+    <a href="studyabroad.html">Study Abroad</a>
+    <a href="financial.html">Financial Planner</a>
+    <a href="saved.html">Saved</a>
+    <a href="profile.html">Profile</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </nav>
+</header>
+
+<script src="js/auth.js"></script>
+<script src="js/studyabroad.js"></script>
+
+<section class="hero">
+  <h1>Study Abroad</h1>
+  <p>Top international universities & exchange programs</p>
+</section>
+
+  <section class="search-section">
+  <div class="search-box">
+    <input type="text" id="abroadSearch" placeholder="Search university or country...">
+    <button onclick="searchAbroad()">Search</button>
+  </div>
+</section>
+
+
+</section>
+
+<section class="grid" id="abroadGrid">
+</section>
+
+<div id="abroadLoadMoreWrapper" class="load-more-wrapper" style="display:none;">
+  <button id="abroadLoadMoreBtn" class="load-more-btn">Load more</button>
+</div>
+
+</body>
+</html>

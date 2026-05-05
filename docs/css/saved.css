@@ -1,0 +1,13 @@
+.hero{
+  padding:70px 40px;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:42px;
+}
+
+#savedGrid{
+  margin-top:20px;
+}
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home | UniScope</title>
+
+  <link rel="stylesheet" href="css/ui.css">
+  <link rel="stylesheet" href="css/home.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <img src="assets/logo.png" alt="UniScope Logo" class="logo">
+    <span class="brand-name">UniScope</span>
+  </div>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="coursefinder.html">Course Finder</a>
+    <a href="studyabroad.html">Study Abroad</a>
+    <a href="financial.html">Financial Planner</a>
+    <a href="saved.html">Saved</a>
+    <a href="profile.html">Profile</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </nav>
+</header>
+
+<script src="js/auth.js"></script>
+
+
+<section class="hero">
+  <h1>Top Universities in 2026</h1>
+  <p>Ranked by placements, academics & reputation</p>
+</section>
+<section class="search-section">
+  <div class="search-box">
+  <input 
+    type="text" 
+    id="collegeSearch" 
+    placeholder="Search by university or location..."
+  >
+  <button onclick="searchColleges()">Search</button>
+</div>
+
+</section>
+
+<section class="grid" id="collegeGrid"></section>
+<div id="loadMoreWrapper" class="load-more-wrapper" style="display:none;">
+  <button id="loadMoreBtn" class="load-more-btn">Load more</button>
+</div>
+
+<script src="js/home.js"></script>
+</body>
+</html>

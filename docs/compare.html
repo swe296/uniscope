@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Compare Colleges | UniScope</title>
+  <link rel="stylesheet" href="css/ui.css">
+  <link rel="stylesheet" href="css/compare.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <img src="assets/logo.png" alt="UniScope Logo" class="logo">
+    <span class="brand-name">UniScope</span>
+  </div>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="coursefinder.html">Course Finder</a>
+    <a href="studyabroad.html">Study Abroad</a>
+    <a href="financial.html">Financial Planner</a>
+    <a href="saved.html">Saved</a>
+    <a href="profile.html">Profile</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </nav>
+</header>
+
+<script src="js/auth.js"></script>
+
+<section class="hero">
+  <h1 class="title">Compare Colleges</h1>
+  <p class="subtitle">Side-by-side comparison of your selected colleges</p>
+</section>
+
+<p class="compare-note">
+  Lower rank is better. Higher package is better. Cutoff and fee depend on available database records.
+</p>
+
+<div class="compare-grid">
+  <div class="college-box" id="c1">
+    <div class="empty-box">Loading first college...</div>
+  </div>
+  <div class="college-box" id="c2">
+    <div class="empty-box">Loading second college...</div>
+  </div>
+</div>
+
+<script src="js/compare.js"></script>
+</body>
+</html>

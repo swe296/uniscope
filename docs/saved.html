@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/ui.css">
+<link rel="stylesheet" href="css/saved.css">
+
+  <title>Saved Colleges | UniScope</title>
+
+  <link rel="stylesheet" href="css/ui.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<header class="navbar">
+ <div class="brand">
+    <img src="assets/logo.png" alt="UniScope Logo" class="logo">
+    <span class="brand-name">UniScope</span>
+  </div>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="coursefinder.html">Course Finder</a>
+    <a href="studyabroad.html">Study Abroad</a>
+    <a href="financial.html">Financial Planner</a>
+    <a href="saved.html">Saved</a>
+    <a href="profile.html">Profile</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </nav>
+</header>
+
+<script src="js/auth.js"></script>
+
+<section class="hero">
+  <h1>Saved Colleges</h1>
+
+  <div class="compare-bar">
+    <button class="primary-btn" onclick="goToCompare()">Compare Selected</button>
+  </div>
+</section>
+
+<section class="grid" id="savedGrid"></section>
+<section class="college-grid" id="savedGrid"></section>
+<script src="js/saved.js"></script>
+</body>
+</html>

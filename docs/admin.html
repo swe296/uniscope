@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Dashboard | UniScope</title>
+  <link rel="stylesheet" href="css/ui.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">
+      <img src="assets/logo.png" alt="UniScope Logo" class="logo">
+      <span class="brand-name">UniScope Admin</span>
+    </div>
+    <nav>
+      <div class="top-tabs">
+        <button type="button" class="tab-btn top-tab-btn active" onclick="switchAdminTab('dashboardTab')">Overview</button>
+        <button type="button" class="tab-btn top-tab-btn" onclick="switchAdminTab('collegesTab')">Colleges</button>
+        <button type="button" class="tab-btn top-tab-btn" onclick="switchAdminTab('addCollegeTab')">Add</button>
+        <button type="button" class="tab-btn top-tab-btn" onclick="switchAdminTab('auditTab')">Audit</button>
+        <button type="button" class="tab-btn top-tab-btn" onclick="switchAdminTab('analyticsTab')">Analytics</button>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Admin Control Center</h1>
+    <p>Manage college records, rankings, and platform data in one place.</p>
+  </section>
+
+  <section class="admin-main">
+    <div id="dashboardTab" class="glass-card panel tab-panel active">
+      <h2>Platform Overview</h2>
+      <section class="stats-grid" id="statsGrid">
+        <div class="glass-card stat"><h3>Total Colleges</h3><p id="statTotal">-</p></div>
+        <div class="glass-card stat"><h3>India Colleges</h3><p id="statIndia">-</p></div>
+        <div class="glass-card stat"><h3>Abroad Colleges</h3><p id="statAbroad">-</p></div>
+        <div class="glass-card stat"><h3>Saved Entries</h3><p id="statSaved">-</p></div>
+      </section>
+      <p class="msg" id="overviewMsg"></p>
+    </div>
+
+    <div id="analyticsTab" class="glass-card panel tab-panel">
+      <h2>Analytics</h2>
+      <div class="charts-grid">
+        <div>
+          <h3>Country-wise Distribution</h3>
+          <canvas id="countryChart"></canvas>
+        </div>
+        <div>
+          <h3>Top 10 Countries</h3>
+          <canvas id="rankChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div id="addCollegeTab" class="glass-card panel tab-panel">
+      <h2>Add College</h2>
+      <div class="form-grid">
+        <input id="newCollegeName" placeholder="College name">
+        <input id="newRank" placeholder="Rank (optional)" type="number">
+        <input id="newCity" placeholder="City">
+        <input id="newState" placeholder="State">
+        <input id="newCountry" placeholder="Country (e.g. INDIA)">
+        <input id="newLink" placeholder="Website URL">
+      </div>
+      <button id="createCollegeBtn" class="primary-btn" type="button" onclick="(window.createCollege ? window.createCollege() : window.forceCreateCollege())">Create College</button>
+      <p class="msg" id="createMsg"></p>
+    </div>
+
+    <div id="collegesTab" class="glass-card panel tab-panel">
+      <h2>College Explorer</h2>
+      <div class="toolbar">
+        <input id="searchQuery" placeholder="Search college name...">
+        <select id="countryFilter">
+          <option value="">All Countries</option>
+          <option value="INDIA">India</option>
+          <option value="ABROAD">Abroad</option>
+        </select>
+        <button id="loadCollegesBtn" type="button" onclick="(window.loadAdminColleges ? window.loadAdminColleges() : window.forceLoadColleges())">Load</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Country</th>
+              <th>Rank</th>
+              <th>Website</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="collegeRows"></tbody>
+        </table>
+      </div>
+      <div class="pager">
+  <button type="button" onclick="prevPage()">Prev</button>
+  <span id="pageInfo">Page 1</span>
+  <button type="button" onclick="nextPage()">Next</button>
+</div>
+      <p class="msg" id="tableMsg"></p>
+    </div>
+
+    <div id="auditTab" class="glass-card panel tab-panel">
+      <h2>Audit Log</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Admin</th>
+              <th>Action</th>
+              <th>Entity</th>
+              <th>ID</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="auditRows"></tbody>
+        </table>
+      </div>
+      <p class="msg" id="auditMsg"></p>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Fallback tab switcher so top-nav tabs always work.
+    function switchAdminTab(tabId) {
+      var panels = document.querySelectorAll(".tab-panel");
+      panels.forEach(function (p) { p.classList.remove("active"); });
+      var panel = document.getElementById(tabId);
+      if (panel) panel.classList.add("active");
+
+      var buttons = document.querySelectorAll(".top-tab-btn");
+      buttons.forEach(function (b) { b.classList.remove("active"); });
+
+      var map = {
+        dashboardTab: ["Overview"],
+        collegesTab: ["Colleges"],
+        addCollegeTab: ["Add"],
+        auditTab: ["Audit"],
+        analyticsTab: ["Analytics"]
+      };
+      var labels = map[tabId] || [];
+      buttons.forEach(function (btn) {
+        if (labels.indexOf(btn.textContent.trim()) !== -1) {
+          btn.classList.add("active");
+        }
+      });
+    }
+  </script>
+  <script src="js/admin.js?v=4"></script>
+  <script>
+    // Hard fallback: always populate overview cards.
+    (function () {
+      var currentPageFallback = 1;
+      var pageSizeFallback = 25;
+
+      function rowTemplateFallback(c) {
+        var safeLink = String(c.COLLEGE_LINK || "").replace(/"/g, "&quot;");
+        var safeRank = c.RANKING_ID == null ? "" : c.RANKING_ID;
+        return (
+          "<tr data-id='" + c.COLLEGE_ID + "'>" +
+            "<td>" + c.COLLEGE_ID + "</td>" +
+            "<td>" + c.COLLEGE_NAME + "</td>" +
+            "<td>" + (c.COUNTRY || "-") + "</td>" +
+            "<td><input class='rankInput' value='" + safeRank + "' type='number'></td>" +
+            "<td><input class='linkInput' value='" + safeLink + "' placeholder='https://...'></td>" +
+            "<td><button type='button' onclick='(window.adminSaveCollege ? window.adminSaveCollege(" + c.COLLEGE_ID + ", this) : window.forceUpdateCollege(" + c.COLLEGE_ID + ", this))'>Save</button> " +
+            "<button type='button' class='danger-btn' onclick='(window.adminDeleteCollege ? window.adminDeleteCollege(" + c.COLLEGE_ID + ", this) : window.forceDeleteCollege(" + c.COLLEGE_ID + ", this))'>Delete</button></td>" +
+          "</tr>"
+        );
+      }
+
+      window.forceLoadColleges = async function () {
+        var tableMsg = document.getElementById("tableMsg");
+        var rowsEl = document.getElementById("collegeRows");
+        var pageInfo = document.getElementById("pageInfo");
+        var query = document.getElementById("searchQuery");
+        var country = document.getElementById("countryFilter");
+        if (!rowsEl) return;
+
+        try {
+          if (tableMsg) tableMsg.textContent = "Loading colleges...";
+          var url =
+            "http://localhost:5000/admin/colleges?page=" + currentPageFallback +
+            "&pageSize=" + pageSizeFallback +
+            "&query=" + encodeURIComponent(query ? query.value.trim() : "") +
+            "&country=" + encodeURIComponent(country ? country.value.trim() : "");
+          var res = await fetch(url);
+          var data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Failed");
+
+          var rows = data.rows || [];
+          rowsEl.innerHTML = rows.map(rowTemplateFallback).join("");
+          if (pageInfo) {
+            var total = Number(data.total || rows.length || 0);
+            var totalPages = Math.max(Math.ceil(total / pageSizeFallback), 1);
+            pageInfo.textContent = "Page " + currentPageFallback + " / " + totalPages;
+          }
+          if (tableMsg) tableMsg.textContent = "Showing " + rows.length + " colleges";
+        } catch (e) {
+          if (tableMsg) tableMsg.textContent = "Failed to load colleges";
+        }
+      };
+
+      window.forceCreateCollege = async function () {
+        var msg = document.getElementById("createMsg");
+        try {
+          var payload = {
+            college_name: (document.getElementById("newCollegeName") || {}).value ? document.getElementById("newCollegeName").value.trim() : "",
+            ranking_id: (document.getElementById("newRank") || {}).value ? document.getElementById("newRank").value.trim() : "",
+            city_name: (document.getElementById("newCity") || {}).value ? document.getElementById("newCity").value.trim() : "",
+            state: (document.getElementById("newState") || {}).value ? document.getElementById("newState").value.trim() : "",
+            country: (document.getElementById("newCountry") || {}).value ? document.getElementById("newCountry").value.trim() : "",
+            college_link: (document.getElementById("newLink") || {}).value ? document.getElementById("newLink").value.trim() : "",
+            admin_email: localStorage.getItem("loggedUser") || "admin@uniscope.com"
+          };
+
+          if (!payload.college_name || !payload.city_name || !payload.country) {
+            if (msg) msg.textContent = "Name, city and country are required";
+            return;
+          }
+
+          if (msg) msg.textContent = "Creating college...";
+          var res = await fetch("http://localhost:5000/admin/college", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-email": payload.admin_email
+            },
+            body: JSON.stringify(payload)
+          });
+          var data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Create failed");
+          if (msg) msg.textContent = "Created college ID " + data.college_id;
+
+          if (window.loadOverview) window.loadOverview();
+          if (window.loadAdminColleges) window.loadAdminColleges();
+        } catch (e) {
+          if (msg) msg.textContent = "Failed to create college";
+        }
+      };
+
+      window.forceUpdateCollege = async function (id, btn) {
+        var row = btn ? btn.closest("tr") : null;
+        if (!row) return;
+        var rankEl = row.querySelector(".rankInput");
+        var linkEl = row.querySelector(".linkInput");
+        var rank = rankEl ? rankEl.value.trim() : "";
+        var link = linkEl ? linkEl.value.trim() : "";
+        var tableMsg = document.getElementById("tableMsg");
+        try {
+          if (btn) btn.disabled = true;
+          var adminEmail = localStorage.getItem("loggedUser") || "admin@uniscope.com";
+          var res = await fetch("http://localhost:5000/admin/college/" + id, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-email": adminEmail
+            },
+            body: JSON.stringify({
+              ranking_id: rank ? Number(rank) : null,
+              college_link: link || null,
+              admin_email: adminEmail
+            })
+          });
+          var data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Update failed");
+          if (tableMsg) tableMsg.textContent = "College " + id + " updated";
+          if (window.forceLoadColleges) window.forceLoadColleges();
+        } catch (e) {
+          if (tableMsg) tableMsg.textContent = "Update failed for " + id;
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      };
+
+      window.forceDeleteCollege = async function (id, btn) {
+        var tableMsg = document.getElementById("tableMsg");
+        if (!confirm("Delete college ID " + id + "?")) return;
+        try {
+          if (btn) btn.disabled = true;
+          var adminEmail = localStorage.getItem("loggedUser") || "admin@uniscope.com";
+          var res = await fetch("http://localhost:5000/admin/college/" + id, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-email": adminEmail
+            }
+          });
+          var data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Delete failed");
+          if (tableMsg) tableMsg.textContent = "College " + id + " deleted";
+          if (window.forceLoadColleges) window.forceLoadColleges();
+        } catch (e) {
+          if (tableMsg) tableMsg.textContent = "Delete failed for " + id;
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      };
+
+      async function fillOverviewFallback() {
+        try {
+          var res = await fetch("http://localhost:5000/admin/overview");
+          var data = await res.json();
+          if (!res.ok) return;
+
+          var total = document.getElementById("statTotal");
+          var india = document.getElementById("statIndia");
+          var abroad = document.getElementById("statAbroad");
+          var saved = document.getElementById("statSaved");
+          var msg = document.getElementById("overviewMsg");
+
+          if (total) total.textContent = data.totalColleges;
+          if (india) india.textContent = data.indiaColleges;
+          if (abroad) abroad.textContent = data.abroadColleges;
+          if (saved) saved.textContent = data.savedEntries;
+          if (msg) msg.textContent = "Last updated: " + new Date().toLocaleTimeString();
+        } catch (e) {
+          var msg = document.getElementById("overviewMsg");
+          if (msg) msg.textContent = "Could not load overview data.";
+        }
+      }
+
+      async function fillAuditFallback() {
+        try {
+          var tbody = document.getElementById("auditRows");
+          var msg = document.getElementById("auditMsg");
+          if (!tbody) return;
+
+          var res = await fetch("http://localhost:5000/admin/audit?limit=80");
+          var data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Failed");
+
+          tbody.innerHTML = (data || []).map(function (r) {
+            var time = r.CREATED_AT ? new Date(r.CREATED_AT).toLocaleString() : "-";
+            return (
+              "<tr>" +
+                "<td>" + time + "</td>" +
+                "<td>" + (r.ADMIN_EMAIL || "-") + "</td>" +
+                "<td>" + (r.ACTION || "-") + "</td>" +
+                "<td>" + (r.ENTITY || "-") + "</td>" +
+                "<td>" + (r.ENTITY_ID || "-") + "</td>" +
+                "<td>" + (r.DETAILS || "") + "</td>" +
+              "</tr>"
+            );
+          }).join("");
+          if (msg) msg.textContent = "Showing " + (data ? data.length : 0) + " audit events";
+        } catch (e) {
+          var msg = document.getElementById("auditMsg");
+          if (msg) msg.textContent = "Could not load audit logs.";
+        }
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+          fillOverviewFallback();
+          fillAuditFallback();
+          var loadBtn = document.getElementById("loadCollegesBtn");
+          if (loadBtn) {
+            loadBtn.addEventListener("click", function () {
+              if (!window.loadAdminColleges) {
+                window.forceLoadColleges();
+              }
+            });
+          }
+          var createBtn = document.getElementById("createCollegeBtn");
+          if (createBtn) {
+            createBtn.addEventListener("click", function () {
+              if (!window.createCollege) {
+                window.forceCreateCollege();
+              }
+            });
+          }
+        });
+      } else {
+        fillOverviewFallback();
+        fillAuditFallback();
+      }
+    })();
+  </script>
+</body>
+</html>

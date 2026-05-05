@@ -1,0 +1,229 @@
+.finance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 48px;
+  padding: 60px 40px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+/* ================= CARD ================= */
+.finance-card {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.85),
+    rgba(2, 6, 23, 0.95)
+  );
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
+  padding: 36px;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.finance-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Highlight card (Loan planner) */
+.finance-card.highlight {
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.9),
+    rgba(3, 7, 28, 0.98)
+  );
+}
+
+/* ================= HEADINGS ================= */
+.finance-card h3 {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ================= LABELS ================= */
+.finance-card label {
+  display: block;
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 6px;
+  letter-spacing: 0.4px;
+}
+
+/* ================= INPUTS ================= */
+.finance-card input {
+  width: 100%;
+  margin-bottom: 22px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  outline: none;
+  background: rgba(2, 6, 23, 0.9);
+  color: #ffffff;
+  font-size: 15px;
+  transition: all 0.25s ease;
+}
+
+.finance-card input::placeholder {
+  color: rgba(148, 163, 184, 0.6);
+}
+
+.finance-card input:focus {
+  border-color: #38bdf8;
+  box-shadow: 
+    0 0 0 3px rgba(56, 189, 248, 0.25),
+    inset 0 0 0 1px rgba(56, 189, 248, 0.4);
+  background: rgba(2, 6, 23, 1);
+}
+
+/* ================= BUTTON ================= */
+.finance-card button {
+  width: 100%;
+  padding: 16px;
+  border-radius: 18px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  color: #020617;
+  background: linear-gradient(135deg, #38bdf8, #a78bfa);
+  box-shadow: 0 16px 40px rgba(56, 189, 248, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.finance-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 60px rgba(56, 189, 248, 0.55);
+}
+
+.finance-card button:active {
+  transform: scale(0.98);
+}
+
+/* ================= RESULT ================= */
+.result-box {
+  margin-top: 26px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.15),
+    rgba(167, 139, 250, 0.15)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: #e0f2fe;
+}
+
+/* ================= INSIGHT ================= */
+.insight {
+  max-width: 960px;
+  margin: 40px auto 80px;
+  padding: 36px;
+  border-radius: 30px;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.25),
+    rgba(167, 139, 250, 0.25)
+  );
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.insight h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.insight p {
+  opacity: 0.9;
+  font-size: 15px;
+}
+.suggestions{
+  margin-top:40px;
+  padding:25px;
+  border-radius:20px;
+  background:linear-gradient(135deg, rgba(56,189,248,0.1), rgba(167,139,250,0.1));
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.suggestions h3{
+  margin-bottom:20px;
+}
+
+.suggestions ul{
+  list-style:none;
+  padding:0;
+}
+
+.suggestions li{
+  margin-bottom:10px;
+  padding:10px;
+  background:rgba(255,255,255,0.05);
+  border-radius:12px;
+}
+/* ================= SUGGESTIONS SECTION ================= */
+
+.suggestions{
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 40px;
+  border-radius: 30px;
+  background: linear-gradient(
+    135deg,
+    rgba(15,23,42,0.85),
+    rgba(30,41,59,0.85)
+  );
+  backdrop-filter: blur(16px);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+
+.suggestions h3{
+  font-size: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.suggestions h4{
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+/* List styling */
+.suggestions ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestions li{
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.25s ease;
+}
+
+.suggestions li:hover{
+  background: rgba(56,189,248,0.12);
+  transform: translateX(6px);
+}

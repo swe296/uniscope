@@ -1,0 +1,63 @@
+.hero{
+  text-align:center;
+  padding:70px 40px;
+}
+
+.hero h1{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  color:#cbd5f5;
+}
+
+.grid{
+  max-width:1200px;
+  margin:auto;
+  padding:40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+
+.rank{
+  color:#38bdf8;
+  font-weight:600;
+}
+
+.details{
+  margin:12px 0;
+}
+
+.card-actions{
+  display:flex;
+  gap:12px;
+  margin-top:16px;
+}
+
+.card-actions button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  background:#38bdf8;
+  font-weight:600;
+}
+
+.load-more-wrapper{
+  display:flex;
+  justify-content:center;
+  margin:0 auto 40px;
+}
+
+.load-more-btn{
+  border:none;
+  border-radius:10px;
+  background:#38bdf8;
+  color:#03132e;
+  font-weight:700;
+  padding:12px 22px;
+  cursor:pointer;
+}
