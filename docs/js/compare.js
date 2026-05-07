@@ -1,5 +1,3 @@
-const API_BASE = "https://uniscope-backend.onrender.com";
-
 document.addEventListener("DOMContentLoaded", async () => {
   const saved = JSON.parse(localStorage.getItem("compareColleges"));
 
@@ -10,8 +8,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const [indiaRes, abroadRes] = await Promise.all([
-      fetch(`${API_BASE}/colleges`),
-      fetch(`${API_BASE}/abroad`)
+      fetch("http://localhost:5000/colleges"),
+      fetch("http://localhost:5000/abroad")
     ]);
 
     const india = await indiaRes.json();
@@ -27,16 +25,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const [data1, data2] = await Promise.all([
-      fetch(`${API_BASE}/compare?id=${c1.COLLEGE_ID}`).then(r => r.json()),
-      fetch(`${API_BASE}/compare?id=${c2.COLLEGE_ID}`).then(r => r.json())
+      fetch(`http://localhost:5000/compare?id=${c1.COLLEGE_ID}`).then(r => r.json()),
+      fetch(`http://localhost:5000/compare?id=${c2.COLLEGE_ID}`).then(r => r.json())
     ]);
 
     fixData(data1);
     fixData(data2);
+
     renderComparison(data1, data2);
   } catch (err) {
     console.error("Compare failed", err);
-    alert("Failed to load comparison data");
   }
 });
 
@@ -74,7 +72,7 @@ function fixData(c) {
   }
 
   if (!c.FEE || c.FEE === 0) {
-    if (c.COUNTRY && String(c.COUNTRY).toLowerCase() !== "india") {
+    if (c.COUNTRY) {
       c.FEE = 2000000 + rank * 50000;
     } else {
       c.FEE = 200000 + rank * 10000;
@@ -82,7 +80,7 @@ function fixData(c) {
   }
 
   if (!c.AVG_SALARY || c.AVG_SALARY === 0) {
-    if (c.COUNTRY && String(c.COUNTRY).toLowerCase() !== "india") {
+    if (c.COUNTRY) {
       c.AVG_SALARY = Math.max(1200000, 3000000 - rank * 50000);
     } else {
       c.AVG_SALARY = Math.max(600000, 2000000 - rank * 30000);

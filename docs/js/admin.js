@@ -2,7 +2,7 @@
   if (window.__uniscopeAdminLoaded) return;
   window.__uniscopeAdminLoaded = true;
 
-const API_BASE = "https://uniscope-backend.onrender.com";
+const API_BASE = "http://localhost:5000";
 const ADMIN_EMAIL = localStorage.getItem("loggedUser") || "admin@uniscope.com";
 const ADMIN_HEADERS = {
   "Content-Type": "application/json",

@@ -1,5 +1,3 @@
-const API_BASE = "https://uniscope-backend.onrender.com";
-
 let totalCostValue = 0;
 let emiValue = 0;
 
@@ -55,13 +53,10 @@ async function suggestOptions() {
   const collegeBox = document.getElementById("collegeSuggestions");
   const bankBox = document.getElementById("bankSuggestions");
 
+  // ---------- COLLEGES FROM ORACLE ----------
   try {
-    const res = await fetch(`${API_BASE}/financial-colleges?budget=${totalCostValue}`);
+    const res = await fetch(`http://localhost:5000/financial-colleges?budget=${totalCostValue}`);
     const colleges = await res.json();
-
-    if (!res.ok) {
-      throw new Error(colleges.error || "Failed to load colleges");
-    }
 
     if (!colleges.length) {
       collegeBox.innerHTML = `
@@ -74,10 +69,10 @@ async function suggestOptions() {
         <ul>
           ${colleges.slice(0, 5).map(c => `
             <li>
-              ${c.COLLEGE_NAME}
-              (${c.CITY_NAME || "Unknown"})
-              - Fee: ₹${Number(c.FEE || 0).toLocaleString()}
-              - Avg: ₹${Number(c.AVG_SALARY || 0).toLocaleString()}
+              ${c.COLLEGE_NAME} 
+              (${c.CITY_NAME || "Unknown"}) 
+              - Fee: ₹${Number(c.FEE).toLocaleString()}
+              - Avg: ₹${Number(c.AVG_SALARY).toLocaleString()}
             </li>
           `).join("")}
         </ul>
@@ -85,13 +80,13 @@ async function suggestOptions() {
     }
 
   } catch (err) {
-    console.error("Failed to load financial college suggestions", err);
     collegeBox.innerHTML = `
       <h4>🎓 Suggested Colleges</h4>
       <p>Failed to load college suggestions.</p>
     `;
   }
 
+  // ---------- BANKS (still static) ----------
   let banks = [];
 
   if (emiValue < 7000) {

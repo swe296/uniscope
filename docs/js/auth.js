@@ -13,7 +13,6 @@ function login() {
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem("loggedUser", email);
     localStorage.setItem("role", "user");
-
     location.replace("home.html");
   } else {
     msg.innerText = "Invalid email or password";
@@ -52,7 +51,6 @@ function adminLogin() {
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem("loggedUser", email);
     localStorage.setItem("role", "admin");
-
     location.replace("admin.html");
   } else {
     msg.innerText = "Invalid admin credentials";
@@ -60,7 +58,9 @@ function adminLogin() {
 }
 
 function logout() {
-  localStorage.clear();
+  localStorage.removeItem("loggedIn");
+  localStorage.removeItem("loggedUser");
+  localStorage.removeItem("role");
   location.replace("auth.html");
 }
 
@@ -68,11 +68,10 @@ function logout() {
   const path = location.pathname.toLowerCase();
   const onAuthPage = path.includes("auth");
   const onAdminPage = path.includes("admin");
-
   const loggedIn = localStorage.getItem("loggedIn");
   const role = localStorage.getItem("role");
 
-  // Protect admin page
+  // Admin page must only be accessible to logged-in admins.
   if (onAdminPage) {
     if (!loggedIn || role !== "admin") {
       location.replace("auth.html");
@@ -80,13 +79,11 @@ function logout() {
     return;
   }
 
-  // Protect user pages
   if (!loggedIn && !onAuthPage) {
     location.replace("auth.html");
     return;
   }
 
-  // Redirect logged-in users away from auth page
   if (loggedIn && onAuthPage) {
     if (role === "admin") {
       location.replace("admin.html");

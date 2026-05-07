@@ -1,8 +1,7 @@
-const API_BASE = "https://uniscope-backend.onrender.com";
-
 let selected = [];
 
 document.addEventListener("DOMContentLoaded", async function () {
+
   const grid = document.getElementById("savedGrid");
   const email = localStorage.getItem("loggedUser");
 
@@ -14,12 +13,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   grid.innerHTML = "<p style='text-align:center'>Loading saved colleges...</p>";
 
   try {
-    const res = await fetch(`${API_BASE}/saved?email=${encodeURIComponent(email)}`);
-    const data = await res.json();
+    const res = await fetch(`http://localhost:5000/saved?email=${email}`);
+    if (!res.ok) throw new Error("Server error");
 
-    if (!res.ok) {
-      throw new Error(data.error || "Server error");
-    }
+    const data = await res.json();
 
     if (!data || data.length === 0) {
       grid.innerHTML = "<p style='text-align:center'>No saved colleges yet.</p>";
@@ -29,8 +26,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     grid.innerHTML = "";
 
     data.forEach(item => {
-      const name = item.college_name || item.COLLEGE_NAME || "Unknown";
-      const type = item.type || item.TYPE || "General";
+      const name = item.COLLEGE_NAME || "Unknown";
+      const type = item.TYPE || "General";
 
       grid.innerHTML += `
         <div class="glass-card">
@@ -38,8 +35,8 @@ document.addEventListener("DOMContentLoaded", async function () {
           <p class="details">${type}</p>
 
           <div class="card-actions">
-            <button onclick="toggleSelect('${name.replace(/'/g, "\\'")}', this)">Select</button>
-            <button onclick="removeCollege('${name.replace(/'/g, "\\'")}')">Remove</button>
+            <button onclick="toggleSelect('${name}', this)">Select</button>
+            <button onclick="removeCollege('${name}')">Remove</button>
           </div>
         </div>
       `;
@@ -49,14 +46,17 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error(err);
     grid.innerHTML = "<p style='text-align:center'>Failed to load saved colleges.</p>";
   }
+
 });
 
 function toggleSelect(name, btn) {
+
   if (selected.includes(name)) {
     selected = selected.filter(c => c !== name);
     btn.innerText = "Select";
     btn.classList.remove("selected-btn");
   } else {
+
     if (selected.length >= 2) {
       alert("You can select only 2 colleges");
       return;
@@ -69,15 +69,19 @@ function toggleSelect(name, btn) {
 }
 
 function goToCompare() {
+
   if (selected.length !== 2) {
     alert("Please select exactly 2 colleges");
     return;
   }
 
   localStorage.setItem("compareColleges", JSON.stringify(selected));
+
   window.location.href = "compare.html";
 }
 
+
+// ---------- REMOVE ----------
 async function removeCollege(name) {
   const email = localStorage.getItem("loggedUser");
 
@@ -87,7 +91,7 @@ async function removeCollege(name) {
   }
 
   try {
-    const res = await fetch(`${API_BASE}/saved`, {
+    const res = await fetch("http://localhost:5000/saved", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -98,13 +102,10 @@ async function removeCollege(name) {
       })
     });
 
-    const data = await res.json();
+    if (!res.ok) throw new Error("Delete failed");
 
-    if (!res.ok) {
-      throw new Error(data.error || "Delete failed");
-    }
+    alert(name + " removed successfully");
 
-    alert(`${name} removed successfully`);
     location.reload();
 
   } catch (err) {
