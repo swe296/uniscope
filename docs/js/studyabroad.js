@@ -1,3 +1,5 @@
+const API_BASE = "https://uniscope-backend.onrender.com";
+
 document.addEventListener("DOMContentLoaded", function () {
   const grid = document.getElementById("abroadGrid");
   const searchInput = document.getElementById("abroadSearch");
@@ -56,22 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
     if (dbCity && dbCity.toLowerCase() !== "unknown") return dbCity;
 
     const rawName = String(university.COLLEGE_NAME || "").trim().toLowerCase();
-    if (!rawName) {
-      return String(university.COUNTRY || "").trim() || "City unavailable";
-    }
+    if (!rawName) return String(university.COUNTRY || "").trim() || "City unavailable";
 
     if (cityOverrides[rawName]) return cityOverrides[rawName];
 
     for (const key of Object.keys(cityOverrides)) {
-      if (rawName.includes(key) || key.includes(rawName)) {
-        return cityOverrides[key];
-      }
+      if (rawName.includes(key) || key.includes(rawName)) return cityOverrides[key];
     }
 
-    const country = String(university.COUNTRY || "").trim();
-    if (country) return country;
-
-    return "City unavailable";
+    return String(university.COUNTRY || "").trim() || "City unavailable";
   }
 
   function renderBatch(list, count) {
@@ -82,15 +77,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const items = list.slice(0, count);
-    const cards = items.map(u => {
+
+    grid.innerHTML = items.map(u => {
       const name = u.COLLEGE_NAME || "Unknown";
-      const rank =
-        u.RANKING_ID === null || u.RANKING_ID === undefined ? "-" : u.RANKING_ID;
+      const rank = u.RANKING_ID == null ? "-" : u.RANKING_ID;
       const country = u.COUNTRY || "Unknown";
       const city = resolveCity(u);
       const website = u.COLLEGE_LINK || "";
       const safeName = String(name).replace(/'/g, "\\'");
-      const safeWebsite = String(website || "").replace(/'/g, "\\'");
+      const safeWebsite = String(website).replace(/'/g, "\\'");
 
       return `
         <div class="glass-card">
@@ -105,9 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         </div>
       `;
-    });
-
-    grid.innerHTML = cards.join("");
+    }).join("");
 
     if (loadMoreWrapper && loadMoreBtn) {
       if (count < list.length) {
@@ -134,11 +127,12 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       grid.innerHTML = "<p style='text-align:center'>Loading universities...</p>";
 
-      const res = await fetch("http://localhost:5000/abroad");
+      const res = await fetch(`${API_BASE}/abroad`);
+      const data = await res.json();
 
-      if (!res.ok) throw new Error("Server error");
+      if (!res.ok) throw new Error(data.error || "Server error");
 
-      universities = await res.json();
+      universities = Array.isArray(data) ? data : [];
       displayUniversities(universities);
     } catch (err) {
       console.error(err);
@@ -157,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const filtered = universities.filter(u =>
       (u.COLLEGE_NAME && u.COLLEGE_NAME.toLowerCase().includes(query)) ||
       (u.COUNTRY && u.COUNTRY.toLowerCase().includes(query)) ||
-      (resolveCity(u) && resolveCity(u).toLowerCase().includes(query))
+      resolveCity(u).toLowerCase().includes(query)
     );
 
     displayUniversities(filtered);
@@ -172,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/saved", {
+      const res = await fetch(`${API_BASE}/saved`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -184,9 +178,11 @@ document.addEventListener("DOMContentLoaded", function () {
         })
       });
 
-      if (!res.ok) throw new Error("Save failed");
+      const data = await res.json();
 
-      alert(name + " saved successfully!");
+      if (!res.ok) throw new Error(data.error || "Save failed");
+
+      alert(data.message || `${name} saved successfully!`);
     } catch (err) {
       console.error(err);
       alert("Failed to save university");
@@ -195,13 +191,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.openUniversity = function (website) {
     const clean = String(website || "").trim();
+
     if (!clean) {
       alert("No website available");
       return;
     }
+
     const url = clean.startsWith("http") ? clean : `https://${clean}`;
     window.open(url, "_blank");
   };
+
+  if (searchInput) {
+    searchInput.addEventListener("input", window.searchAbroad);
+  }
 
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener("click", loadMoreUniversities);

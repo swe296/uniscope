@@ -1,8 +1,10 @@
+const API_BASE = "https://uniscope-backend.onrender.com";
+
 let cutoffChart;
 
 async function loadCutoffChart(collegeId, studentCutoff) {
   try {
-    const res = await fetch(`http://localhost:5000/cutoff-trend?collegeId=${collegeId}`);
+    const res = await fetch(`${API_BASE}/cutoff-trend?collegeId=${collegeId}`);
     const data = await res.json();
 
     if (!data.length) {
@@ -13,7 +15,6 @@ async function loadCutoffChart(collegeId, studentCutoff) {
     const labels = data.map(d => String(d.YEAR));
     const values = data.map(d => Number(d.CUTOFF_MARK));
 
-    // add student value
     labels.push("You");
     values.push(Number(studentCutoff));
 

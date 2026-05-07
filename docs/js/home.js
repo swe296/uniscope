@@ -1,3 +1,5 @@
+const API_BASE = "https://uniscope-backend.onrender.com";
+
 const grid = document.getElementById("collegeGrid");
 const searchInput = document.getElementById("collegeSearch");
 const loadMoreWrapper = document.getElementById("loadMoreWrapper");
@@ -18,8 +20,7 @@ function renderBatch(list, count) {
   const items = list.slice(0, count);
   const cards = items.map(c => {
     const name = c.COLLEGE_NAME || "Unknown";
-    const rank =
-      c.RANKING_ID === null || c.RANKING_ID === undefined ? "-" : c.RANKING_ID;
+    const rank = c.RANKING_ID === null || c.RANKING_ID === undefined ? "-" : c.RANKING_ID;
     const id = c.COLLEGE_ID || "-";
     const city = c.CITY_NAME || "Unknown";
     const link = c.COLLEGE_LINK || "";
@@ -66,7 +67,7 @@ async function loadColleges() {
   try {
     grid.innerHTML = "<p style='text-align:center'>Loading colleges...</p>";
 
-    const res = await fetch("http://localhost:5000/colleges");
+    const res = await fetch(`${API_BASE}/colleges`);
     const data = await res.json();
 
     if (!res.ok) {
@@ -97,6 +98,10 @@ function searchColleges() {
   displayColleges(filtered);
 }
 
+if (searchInput) {
+  searchInput.addEventListener("input", searchColleges);
+}
+
 if (loadMoreBtn) {
   loadMoreBtn.addEventListener("click", loadMoreColleges);
 }
@@ -110,7 +115,7 @@ async function saveCollege(name) {
   }
 
   try {
-    const res = await fetch("http://localhost:5000/saved", {
+    const res = await fetch(`${API_BASE}/saved`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -128,7 +133,7 @@ async function saveCollege(name) {
       throw new Error(data.error || "Save failed");
     }
 
-    alert(data.message || (name + " saved successfully!"));
+    alert(data.message || `${name} saved successfully!`);
   } catch (err) {
     console.error(err);
     alert("Failed to save college");
@@ -137,11 +142,13 @@ async function saveCollege(name) {
 
 function openCollege(link) {
   const clean = String(link || "").trim();
+
   if (clean) {
     const url = clean.startsWith("http") ? clean : `https://${clean}`;
     window.open(url, "_blank");
     return;
   }
+
   alert("No website available for this college");
 }
 

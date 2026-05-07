@@ -1,5 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
+const API_BASE = "https://uniscope-backend.onrender.com";
 
+document.addEventListener("DOMContentLoaded", function () {
   let currentStep = 1;
   const steps = document.querySelectorAll(".step");
   const totalSteps = steps.length;
@@ -60,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.submitProfile = async function () {
     const profileData = {
       name: document.getElementById("name")?.value || "",
-      email: document.getElementById("email")?.value || "",
+      email: document.getElementById("email")?.value || getUserEmail(),
       phone: document.getElementById("phone")?.value || "",
       city: document.getElementById("city")?.value || "",
       course: document.getElementById("course")?.value || "",
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     try {
-      await fetch("http://localhost:5000/student-profile", {
+      const res = await fetch(`${API_BASE}/student-profile`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -77,10 +78,17 @@ document.addEventListener("DOMContentLoaded", function () {
         body: JSON.stringify(profileData)
       });
 
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to save profile");
+      }
+
       localStorage.setItem(`studentProfile_${getUserEmail()}`, JSON.stringify(profileData));
       displayProfile(profileData);
 
     } catch (err) {
+      console.error(err);
       alert("Failed to save to database, saving locally");
       localStorage.setItem(`studentProfile_${getUserEmail()}`, JSON.stringify(profileData));
       displayProfile(profileData);
@@ -115,24 +123,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const email = getUserEmail();
 
     try {
-      const res = await fetch(`http://localhost:5000/student-profile?email=${email}`);
+      const res = await fetch(`${API_BASE}/student-profile?email=${encodeURIComponent(email)}`);
       const data = await res.json();
 
       if (data) {
         const profileData = {
-          name: data.FIRST_NAME,
-          email: data.EMAIL,
-          phone: data.PHONE_NO,
-          city: data.PREF_CITY,
-          course: data.PREFERRED_COURSE,
-          budget: data.BUDGET,
-          score: data.SCORE
+          name: data.name || data.FIRST_NAME || "",
+          email: data.email || data.EMAIL || email,
+          phone: data.phone || data.PHONE_NO || "",
+          city: data.city || data.PREF_CITY || "",
+          course: data.course || data.PREFERRED_COURSE || "",
+          budget: data.budget || data.BUDGET || "",
+          score: data.score || data.SCORE || ""
         };
 
         displayProfile(profileData);
         return;
       }
-    } catch (err) {}
+    } catch (err) {
+      console.error("Profile load failed", err);
+    }
 
     const local = JSON.parse(localStorage.getItem(`studentProfile_${email}`));
     if (local) displayProfile(local);
