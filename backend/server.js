@@ -1,10 +1,10 @@
-const oracledb = require("oracledb");
+//const oracledb = require("oracledb");
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
 
-oracledb.initOracleClient({ libDir: "C:\\oracle\\instantclient" });
+//oracledb.initOracleClient({ libDir: "C:\\oracle\\instantclient" });
 
 const app = express();
 
@@ -195,30 +195,33 @@ app.get("/stats/colleges", async (req, res) => {
   }
 });
 
-app.get("/colleges", async (req, res) => {
-  let connection;
-  try {
-    connection = await oracledb.getConnection(dbConfig);
-    const result = await connection.execute(
-      `select c.ranking_id,
-              c.college_id,
-              c.college_name,
-              c.college_link,
-              ct.city_name,
-              ct.country
-       from sys.college c
-       left join sys.city ct on c.city_id = ct.city_id
-       where upper(nvl(trim(ct.country), 'INDIA')) = 'INDIA'
-       order by nvl(c.ranking_id, 999999), c.college_name, c.college_id`,
-      [],
-      { outFormat: oracledb.OUT_FORMAT_OBJECT }
-    );
-    res.json(result.rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  } finally {
-    await closeConnection(connection);
-  }
+app.get("/colleges", (req, res) => {
+  res.json([
+    {
+      RANKING_ID: 1,
+      COLLEGE_ID: 13980,
+      COLLEGE_NAME: "Indian Institute of Technology",
+      COLLEGE_LINK: "https://www.iitm.ac.in/",
+      CITY_NAME: "Chennai",
+      COUNTRY: "India"
+    },
+    {
+      RANKING_ID: 2,
+      COLLEGE_ID: 1680,
+      COLLEGE_NAME: "Indian Institute of Science",
+      COLLEGE_LINK: "https://www.iisc.ac.in/",
+      CITY_NAME: "Bengaluru",
+      COUNTRY: "India"
+    },
+    {
+      RANKING_ID: 3,
+      COLLEGE_ID: 1695,
+      COLLEGE_NAME: "Indian Institute of Technology Bombay",
+      COLLEGE_LINK: "https://www.iitb.ac.in/",
+      CITY_NAME: "Mumbai",
+      COUNTRY: "India"
+    }
+  ]);
 });
 
 app.get("/abroad", async (req, res) => {
